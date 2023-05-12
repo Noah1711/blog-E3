@@ -25,17 +25,16 @@
       }
     </style>
     <% if (locals.user) { %>
-      <header><%- include("partials/header") %></header>
-      <% } else { %>
-      <header><%- include("partials/header2") %></header>
-      <% } %>
+    <header><%- include("partials/header") %></header>
+    <% } else { %>
+    <header><%- include("partials/header2") %></header>
+    <% } %>
     <!-- HEADER -->
-    <div
-      id="hero"
-      class="text-center">
+    <div id="hero" class="text-center">
       <h1><%=article.title %></h1>
       <p>
-        Publicado el día <%=article.createdAt%> por <%=article.authorId.fullName%>
+        Publicado el día <%=article.createdAt%> por
+        <%=article.authorId.fullName%>
       </p>
     </div>
 
@@ -70,7 +69,7 @@
                 class="form-control"
                 id="content"
                 name="content"
-                style="height:150px; padding:10px;"
+                style="height: 150px; padding: 10px"
               ></textarea>
             </div>
             <button
@@ -82,7 +81,7 @@
             </button>
           </form>
           <% } else { %>
-             <h3><a href="/login">LogIn</a> para comentar</h3> 
+          <h3><a href="/login">LogIn</a> para comentar</h3>
           <% } %>
           <div id="comments" class="mt-5">
             <% if (listaDeComentarios.length > 0) { %>
