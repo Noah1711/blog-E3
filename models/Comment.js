@@ -9,10 +9,6 @@ class Comment extends Model {
           primaryKey: true,
           autoIncrement: true,
         },
-        fullName: {
-          type: DataTypes.STRING(100),
-          allowNull: false,
-        },
         content: {
           type: DataTypes.TEXT,
           allowNull: false,
@@ -21,7 +17,6 @@ class Comment extends Model {
       {
         sequelize,
         modelName: "comment",
-        timestamps: false,
       }
     );
     return Comment;

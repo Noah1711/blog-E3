@@ -16,13 +16,12 @@ async function createdAuthor(req, res) {
     password: passHasheada,
   });
 
-  if (newAuthor) {
-    req.login(newAuthor, () => res.redirect("/home"));
-  } else {
-    res.redirect("back");
+  const role = await Role.findOne({ where: { roleName: "lector" } });
+  if (role) {
+    newAuthor.setRole(role);
   }
 
-  //return res.redirect("home");
+  req.login(newAuthor, () => res.redirect("/home"));
 }
 
 module.exports = {

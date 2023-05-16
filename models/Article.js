@@ -48,9 +48,6 @@ class Article extends Model {
       {
         sequelize,
         modelName: "article",
-        timestamps: true,
-        createdAt: "createdAt",
-        updatedAt: "updatedAt",
       }
     );
     return Article;

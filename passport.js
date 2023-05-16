@@ -31,7 +31,7 @@ function passportConfig() {
   });
   passport.deserializeUser(async function (id, done) {
     try {
-      const user = await Author.findByPk(id);
+      const user = await Author.findByPk(id, { include: "role" });
       done(null, user);
     } catch (error) {
       done(error);
@@ -39,4 +39,4 @@ function passportConfig() {
   });
 }
 
-module.exports = passportConfig;
+module.exports = { passportConfig, passport };

@@ -50,20 +50,8 @@
 
       <div class="row align-items-center">
         <div class="col-md-6 mx-auto mt-3">
-          <% if(locals.user){ %>
           <h5>Add your coment</h5>
           <form action="/article/review/<%=article.id%>" method="POST">
-            <div class="mb-3">
-              <label for="inputName" class="form-label"></label>
-              <input
-                type="text"
-                class="form-control"
-                id="inputName"
-                name="inputName"
-                aria-describedby="emailHelp"
-                placeholder="Name"
-              />
-            </div>
             <div class="form-floating">
               <textarea
                 class="form-control"
@@ -80,18 +68,13 @@
               Send
             </button>
           </form>
-          <% } else { %>
-          <h3><a href="/login">LogIn</a> para comentar</h3>
-          <% } %>
-          <div id="comments" class="mt-5">
-            <% if (listaDeComentarios.length > 0) { %>
-            <h5>Comentarios (<%= listaDeComentarios.length %>)</h5>
-            <% for (let i = 0; i < listaDeComentarios.length; i++) { %>
-            <p><%= listaDeComentarios[i].content %></p>
-            <small><%= listaDeComentarios[i].fullName %></small>
-            <hr />
-            <% } %> <% } else { %>
-            <p>Aún no hay comentarios.</p>
+          <h3>Comentarios:</h3>
+          <div id="comment-section">
+            <% if (comments && comments.length > 0) { %> <%
+            comments.forEach(function(comment) { %>
+            <p><%= comment.fullName %>: <%= comment.content %></p>
+            <% }); %> <% } else { %>
+            <p>No hay comentarios.</p>
             <% } %>
           </div>
         </div>

@@ -12,18 +12,23 @@ async function review(req, res) {
   return res.redirect(`/article/${articleId}`);
 }
 
-// async function findComments(req, res) {
-//   const id = req.params.id;
-//   const listaDeComentarios = await Comment.findAll({
-//     where: {
-//       articleId: id,
-//     },
-//   });
-//   res.render("notice", {
-//     listaDeComentarios,
-//   });
-// }
+async function findComments(req, res) {
+  const articleId = req.params.id;
+
+  const article = await Article.findByPk(articleId);
+
+  if (article) {
+    const comments = await Comment.findAll({
+      where: { articleId: articleId },
+    });
+
+    return res.render("notice", { article: article, comments: comments });
+  } else {
+    return res.redirect("/home");
+  }
+}
 
 module.exports = {
   review,
+  findComments,
 };

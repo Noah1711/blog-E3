@@ -16,11 +16,12 @@ const sequelize = new Sequelize(
 const Article = require("./Article");
 const Author = require("./Author");
 const Comment = require("./Comment");
-const authorSeeder = require("../seeders/authorSeeder");
+const Role = require("./Role");
 
 Article.initModel(sequelize);
 Author.initModel(sequelize);
 Comment.initModel(sequelize);
+Role.initModel(sequelize);
 
 Author.hasMany(Article);
 Article.belongsTo(Author);
@@ -28,14 +29,15 @@ Article.belongsTo(Author);
 Article.hasMany(Comment);
 Comment.belongsTo(Article);
 
-sequelize.sync({ alter: true }).then(async () => {
-  await authorSeeder(Author);
-  await articleSeeder(Article);
-});
+Author.belongsTo(Role);
+Role.hasMany(Author);
+
+// sequelize.sync({ force: true });
 
 module.exports = {
   sequelize,
   Article,
   Author,
   Comment,
+  Role,
 };
